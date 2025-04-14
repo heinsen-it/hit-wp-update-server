@@ -1,0 +1,1 @@
+# hit-wp-update-server
