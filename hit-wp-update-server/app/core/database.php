@@ -1,5 +1,5 @@
 <?php
-namespace hitdownloads\app\helpers;
+namespace hitwpupdateserver\app\core;
 
 use PDO;
 use PDOException;
