@@ -6,7 +6,7 @@ class keycrypt
 {
 
 
-    const mainlength = KEYLENGTH; // 1024 , 2048 , 4096
+   public static ?int $mainlength = null; // 1024 , 2048 , 4096
 
 
 
@@ -57,7 +57,7 @@ class keycrypt
 
     public static function encrypt(string $input, string $filename,bool $isPub = true):?string
     {
-        $length = self::mainlength / 8;
+        $length = self::$mainlength / 8;
         $length = $length - 42;
 
         $pub = file_get_contents($filename);
@@ -84,7 +84,7 @@ class keycrypt
 
     public static function decrypt(string $input, string $filename, bool $isPub = false):?string
     {
-        $length = self::mainlength / 8;
+        $length = self::$mainlength / 8;
 
         $priv = file_get_contents($filename);
         $encrypted = base64_decode($input);
@@ -111,7 +111,7 @@ class keycrypt
 
     public static function createkeys(string $privfile,string $pubfile){
         $config = [
-            "private_key_bits" => self::mainlength,    // 4096
+            "private_key_bits" => self::$mainlength,    // 4096
             "private_key_type" => OPENSSL_KEYTYPE_RSA,
         ];
 
