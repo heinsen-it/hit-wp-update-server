@@ -25,4 +25,39 @@ class app{
     }
 
 
+    private function _loadExistingController() {
+        if(empty($this->_url[0])){
+            $controllerName = 'Start';
+        } else {
+            $controllerName = $this->_url[0] ?? 'Start';
+        }
+       $actionName = $this->_url[1] ?? 'index';
+
+        // Namespace-Prefix für Controller
+        $namespacePrefix = MYNAMESPACE.'\\app\\controllers\\';
+
+        // Vollqualifizierter Klassenname des Controllers
+        $controllerClassName = $namespacePrefix . $controllerName;
+        // Überprüfe, ob der Controller existiert
+        if (class_exists($controllerClassName)) {
+            $controller = new $controllerClassName();
+
+            // Überprüfe, ob die Aktionsmethode existiert
+            if (method_exists($controller, $actionName)) {
+                $controller->$actionName();
+            } else {
+              $this->myerror();
+            }
+        } else {
+            $this->myerror();
+        }
+
+    }
+
+
+    public function myerror(){
+
+    }
+
+
 }
