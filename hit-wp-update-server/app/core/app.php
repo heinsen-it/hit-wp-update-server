@@ -9,8 +9,16 @@ class app{
     private $_controller = null;
 
     public function __construct() {
+        if(!extension_loaded('openssl'))
+        {
+            throw new \Exception('Diese Application benötigt OpenSSL. Bitte installiere die PHP-Erweiterung.');
+        }
            // Setzt die URL
         $this->_getUrl();
+    }
+
+    public function init(){
+     $this->_loadExistingController();
     }
 
     public function setController($name) {
@@ -56,7 +64,12 @@ class app{
 
 
     public function myerror(){
-
+        http_response_code(404);
+        header('Content-Type: application/json');
+        $data['status'] = 'fail';
+        $data['code'] = '404';
+        $data['message'] = 'Hallo Start';
+        echo json_encode($data);
     }
 
 
