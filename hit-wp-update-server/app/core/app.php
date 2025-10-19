@@ -13,6 +13,10 @@ class app{
         {
             throw new \Exception('Diese Application benötigt OpenSSL. Bitte installiere die PHP-Erweiterung.');
         }
+
+        if (!extension_loaded('zip')) {
+           throw new \Exception('Diese Application benötigt ZIP. Bitte installiere die PHP-Erweiterung.');
+        }
            // Setzt die URL
         $this->_getUrl();
     }
